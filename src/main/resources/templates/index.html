@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"  lang="en">
+<head>
+    <title>Title</title>
+</head>
+<body >
+<form action="init.do" method="post">
+    <h1>空气质量监测信息库</h1>
+   按区域查找 <select name="districtid"  >
+                <option th:value="-1" >不限</option>
+                <option th:each="pp:${pb.typeDatas}" th:value="${pp.districtid}"  th:text="${pp.districtname}" ></option>
+    </select>
+<button type="submit">查找</button>
+    <input type="text" th:value="${pb.currentPage}" th:name="cp" th:id="cp" />
+</form>
+    <table>
+        <tr>
+            <th>序号</th>
+            <th>区域</th>
+            <th>监测时间</th>
+            <th>PM10数据</th>
+            <th>PM2.5数据</th>
+            <th>监测站</th>
+        </tr>
+        <tr th:each="ppb:${pb.datas}">
+            <td th:text="${ppb.airid}">1</td>
+            <td th:text="${ppb.districtname}">2</td>
+            <td th:text="${#dates.format(ppb.monitortime,'yyyy-MM-dd')}">3</td>
+            <td th:text="${ppb.pm_10}">4</td>
+            <td th:text="${ppb.pm_25}">5</td>
+            <td th:text="${ppb.station}">6</td>
+        </tr>
+    </table>
+    <ul>
+        <li><a href="javascript:;" th:lang="1">首页</a></li>
+        <li><a  href="javascript:;" th:lang="${pb.prev}">上页</a></li>
+        <li><a  href="javascript:;" th:lang="${pb.next}">下页</a></li>
+        <li><a href="javascript:;" th:lang="${pb.countPage}">尾页</a></li>
+    </ul>
+<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+<script>
+    ;(function ($) {
+        function xxx() {
+
+            $("ul li a").bind("click", yyy);
+        }
+        function yyy() {
+            $("#cp").val($(this).attr('lang'));
+            $("form").submit();
+        }
+        xxx();
+    })(jQuery);
+</script>
+</body>
+
+</html>
