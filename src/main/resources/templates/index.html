@@ -7,8 +7,8 @@
 <form action="init.do" method="post">
     <h1>空气质量监测信息库</h1>
    按区域查找 <select name="districtid"  >
-                <option th:value="-1" >不限</option>
-                <option th:each="pp:${pb.typeDatas}" th:value="${pp.districtid}"  th:text="${pp.districtname}" ></option>
+                <option th:value="-1" th:selected="-1==${pb.districtid}">不限</option>
+                <option th:each="pp:${pb.typeDatas}" th:value="${pp.districtid}"  th:text="${pp.districtname}" th:selected="${pp.districtid}==${pb.districtid}"></option>
     </select>
 <button type="submit">查找</button>
     <input type="text" th:value="${pb.currentPage}" th:name="cp" th:id="cp" />
@@ -41,12 +41,17 @@
 <script>
     ;(function ($) {
         function xxx() {
-
+            $("select").bind("change",uuu);
             $("ul li a").bind("click", yyy);
+
         }
         function yyy() {
             $("#cp").val($(this).attr('lang'));
             $("form").submit();
+        }
+        function uuu() {
+            $("#cp").val(1);
+            $("ul li a").attr('lang',1);
         }
         xxx();
     })(jQuery);

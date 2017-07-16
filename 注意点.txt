@@ -1,0 +1,11 @@
+遇到的几个难点：
+1.下拉框的默认选中问题：每次点击下一页或上一页时，下拉框中的值不应改变。
+<option th:each="pp:${pb.typeDatas}" th:value="${pp.districtid}"  th:text="${pp.districtname}"
+th:selected="${pp.districtid}==${pb.districtid}">
+</option>
+2.关于引入css文件和js/jQuery文件：首先需要在application.properties中设置
+spring.resources.static-locations = classpath:/static/   --将默认的静态文件路径指向resources/static下，在static文件夹下新建js文件夹
+html中引入语句为：<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+3.添加mapper.xml的大致流程如第2点
+首先在application.properties中设置mybatis.mapper-locations=classpath:mapper/*.xml
+然后在resources文件夹下新建mapper文件夹，新建mapper.xml文件
