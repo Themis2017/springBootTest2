@@ -9,3 +9,4 @@ html中引入语句为：<script th:src="@{/js/jquery-1.11.0.min.js}"></script>
 3.添加mapper.xml的大致流程如第2点
 首先在application.properties中设置mybatis.mapper-locations=classpath:mapper/*.xml
 然后在resources文件夹下新建mapper文件夹，新建mapper.xml文件
+XXX
